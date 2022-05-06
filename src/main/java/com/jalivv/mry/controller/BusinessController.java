@@ -2,6 +2,8 @@ package com.jalivv.mry.controller;
 
 import com.jalivv.mry.entity.Business;
 import com.jalivv.mry.service.BusinessService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("business")
+@Api(tags = "商家模块")
 public class BusinessController {
     /**
      * 服务对象
@@ -43,6 +46,7 @@ public class BusinessController {
      * @return 单条数据
      */
     @GetMapping("{id}")
+    @ApiOperation("通过主键查询单条数据")
     public ResponseEntity<Business> queryById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(this.businessService.queryById(id));
     }

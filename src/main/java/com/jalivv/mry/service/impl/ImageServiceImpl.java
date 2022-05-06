@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Image)表服务实现类
@@ -78,5 +79,16 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public boolean deleteById(Long id) {
         return this.imageDao.deleteById(id) > 0;
+    }
+
+    /**
+     * 通过 图片type 查询图片集合
+     * @param type
+     * @return
+     */
+    @Override
+    public List<Image> queryByType(String type) {
+        return imageDao.queryByType(type);
+
     }
 }

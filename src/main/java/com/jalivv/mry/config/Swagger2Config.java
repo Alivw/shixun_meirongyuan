@@ -29,7 +29,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.whx.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.jalivv.mry.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -41,10 +41,10 @@ public class Swagger2Config {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("xxxAPI接口文档")
-                .description("xxxAPI接口文档")
+                .title("实训美容院API接口文档")
+                .description("API接口文档")
                 .termsOfServiceUrl("http://127.0.0.1:80")
-                .contact(new Contact("whx","http://127.0.0.1:80","1511544852@qq.com"))
+                .contact(new Contact("jalivv","http://127.0.0.1:80","jalivv666@163.com"))
                 .version("1.0")
                 .build();
     }

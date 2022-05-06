@@ -4,6 +4,8 @@ import com.jalivv.mry.entity.Image;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 /**
  * (Image)表服务接口
  *
@@ -53,4 +55,10 @@ public interface ImageService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 通过 图片type 查询图片集合
+     * @param type
+     * @return
+     */
+    List<Image> queryByType(String type);
 }

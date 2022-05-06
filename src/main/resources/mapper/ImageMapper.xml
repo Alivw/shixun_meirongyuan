@@ -12,8 +12,11 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="ImageMap">
-        select
-          id, imageurl, imagetitle, imagetype, imagestate
+        select id,
+               imageurl,
+               imagetitle,
+               imagetype,
+               imagestate
         from image
         where id = #{id}
     </select>
@@ -21,7 +24,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ImageMap">
         select
-          id, imageurl, imagetitle, imagetype, imagestate
+        id, imageurl, imagetitle, imagetype, imagestate
         from image
         <where>
             <if test="id != null">
@@ -76,7 +79,7 @@
         insert into image(imageurl, imagetitle, imagetype, imagestate)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.imageurl}, #{entity.imagetitle}, #{entity.imagetype}, #{entity.imagestate})
+            (#{entity.imageurl}, #{entity.imagetitle}, #{entity.imagetype}, #{entity.imagestate})
         </foreach>
     </insert>
 
@@ -115,8 +118,18 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from image where id = #{id}
+        delete
+        from image
+        where id = #{id}
     </delete>
+
+    <!--通过 图片type 查询图片集合-->
+    <select id="queryByType" resultType="com.jalivv.mry.entity.Image">
+        SELECT id, imageurl, imagetitle, imagetype, imagestate
+        from image
+        WHERE imagetype = #{type}
+          AND imagestate = '1'
+    </select>
 
 </mapper>
 

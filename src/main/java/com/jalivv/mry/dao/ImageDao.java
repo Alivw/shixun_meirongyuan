@@ -81,5 +81,11 @@ public interface ImageDao {
      */
     int deleteById(Long id);
 
+    /**
+     * 通过 图片type 查询图片集合
+     * @param type
+     * @return
+     */
+    List<Image> queryByType(String type);
 }
 

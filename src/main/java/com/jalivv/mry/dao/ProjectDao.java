@@ -1,6 +1,7 @@
 package com.jalivv.mry.dao;
 
 import com.jalivv.mry.entity.Project;
+import com.jalivv.mry.entity.R;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
@@ -81,5 +82,10 @@ public interface ProjectDao {
      */
     int deleteById(Long id);
 
+    /**
+     * 获取所有的项目信息
+     * @return
+     */
+    List<Project> getProinfos();
 }
 

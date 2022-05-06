@@ -1,8 +1,11 @@
 package com.jalivv.mry.service;
 
 import com.jalivv.mry.entity.Project;
+import com.jalivv.mry.entity.R;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+
+import java.util.List;
 
 /**
  * (Project)表服务接口
@@ -52,5 +55,11 @@ public interface ProjectService {
      * @return 是否成功
      */
     boolean deleteById(Long id);
+
+    /**
+     * 获取所有的项目信息
+     * @return
+     */
+    List<Project> getProinfos();
 
 }

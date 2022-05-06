@@ -1,13 +1,18 @@
 package com.jalivv.mry.controller;
 
 import com.jalivv.mry.entity.Project;
+import com.jalivv.mry.entity.R;
 import com.jalivv.mry.service.ProjectService;
+import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Project)表控制层
@@ -18,6 +23,11 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("project")
 public class ProjectController {
+
+
+    private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
+
+
     /**
      * 服务对象
      */
@@ -80,5 +90,18 @@ public class ProjectController {
         return ResponseEntity.ok(this.projectService.deleteById(id));
     }
 
+
+    @ApiOperation(value = "获取项目信息",notes = "获取所有的项目信息")
+    @GetMapping("getProinfos")
+    public R getProinfos(){
+        try {
+            List<Project> ps = projectService.getProinfos();
+
+            return R.ok(ps);
+        } catch (Exception e) {
+            logger.error("{}", e.getMessage());
+            return R.error("获取项目信息失败" + e.getMessage(), null);
+        }
+    }
 }
 

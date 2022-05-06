@@ -2,6 +2,7 @@ package com.jalivv.mry.service.impl;
 
 import com.jalivv.mry.entity.Project;
 import com.jalivv.mry.dao.ProjectDao;
+import com.jalivv.mry.entity.R;
 import com.jalivv.mry.service.ProjectService;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Project)表服务实现类
@@ -78,5 +80,14 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public boolean deleteById(Long id) {
         return this.projectDao.deleteById(id) > 0;
+    }
+
+    /**
+     * 获取所有的项目信息
+     * @return
+     */
+    @Override
+    public List<Project> getProinfos() {
+        return projectDao.getProinfos();
     }
 }
