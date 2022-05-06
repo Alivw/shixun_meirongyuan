@@ -62,4 +62,11 @@ public interface ProjectService {
      */
     List<Project> getProinfos();
 
+    /**
+     * 分页获取项目信息
+     * @param start
+     * @param pageSize
+     * @return
+     */
+    List<Project> getProinfos(int start, int pageSize);
 }

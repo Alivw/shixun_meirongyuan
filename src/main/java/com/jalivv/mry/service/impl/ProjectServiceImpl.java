@@ -90,4 +90,15 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> getProinfos() {
         return projectDao.getProinfos();
     }
+
+    /**
+     * 分页获取项目信息
+     * @param start
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Project> getProinfos(int start, int pageSize) {
+        return projectDao.getProinfosFatch(start, pageSize);
+    }
 }

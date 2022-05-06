@@ -197,5 +197,26 @@
         where p.imageid = i.id
         and p.prostatus = '1'
     </select>
+
+    <select id="getProinfosFatch" resultMap="ProjectMap">
+        SELECT
+            p.id id,
+            p.proexplain proexplain,
+            p.proprice proprice,
+            p.prostep prostep,
+            p.protypeid protypeid,
+            p.proname proname,
+            p.imageid imageid,
+            p.prostatus prostatus,
+            p.busid busid,
+            p.tecid tecid,
+
+            i.imageurl imageurl
+        from project p,image i
+        where p.imageid = i.id
+          and p.prostatus = '1'
+
+        ORDER BY p.id limit  #{start} ,#{pageSize}
+    </select>
 </mapper>
 

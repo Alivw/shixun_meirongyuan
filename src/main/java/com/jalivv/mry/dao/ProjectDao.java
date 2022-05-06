@@ -87,5 +87,8 @@ public interface ProjectDao {
      * @return
      */
     List<Project> getProinfos();
+
+    List<Project> getProinfosFatch(@Param("start") int start, @Param("pageSize") int pageSize);
+
 }
 

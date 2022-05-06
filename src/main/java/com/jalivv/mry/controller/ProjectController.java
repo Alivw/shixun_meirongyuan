@@ -1,12 +1,12 @@
 package com.jalivv.mry.controller;
 
+import com.jalivv.mry.entity.Page;
 import com.jalivv.mry.entity.Project;
 import com.jalivv.mry.entity.R;
 import com.jalivv.mry.service.ProjectService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -103,5 +103,20 @@ public class ProjectController {
             return R.error("获取项目信息失败" + e.getMessage(), null);
         }
     }
+
+    @ApiOperation(value = "获取项目信息",notes = "获取所有的项目信息")
+    @GetMapping("/fatch")
+    public R getProInfosFatch(Page page){
+        try {
+
+            List<Project> ps = projectService.getProinfos((page.getPageNo() - 1) * page.getPageSize(), page.getPageSize());
+
+            return R.ok(ps);
+        } catch (Exception e) {
+            logger.error("{}", e.getMessage());
+            return R.error("获取项目信息失败" + e.getMessage(), null);
+        }
+    }
+
 }
 
