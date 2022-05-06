@@ -13,6 +13,8 @@
         <result property="prostatus" column="prostatus" jdbcType="VARCHAR"/>
         <result property="busid" column="busid" jdbcType="INTEGER"/>
         <result property="tecid" column="tecid" jdbcType="INTEGER"/>
+        <!--设置新属性的映射关系-->
+        <result property="image.imageurl" column="imageurl"></result>
     </resultMap>
 
     <!--查询单个-->
@@ -179,7 +181,7 @@
     <select id="getProinfos" resultMap="ProjectMap">
         SELECT
         <!--起别名，防止和image中的id重复-->
-        p.id pid,
+        p.id id,
         p.proexplain proexplain,
         p.proprice proprice,
         p.prostep prostep,
@@ -195,22 +197,5 @@
         where p.imageid = i.id
         and p.prostatus = '1'
     </select>
-
-    <!--修改映射 注意修改column="pid" 因为sql中代表项目的id别名是pid -->
-    <resultMap type="com.whx.entity.Project" id="ProjectMap">
-        <!---->
-        <result property="id" column="pid" jdbcType="INTEGER"/>
-        <result property="proexplain" column="proexplain" jdbcType="VARCHAR"/>
-        <result property="proprice" column="proprice" jdbcType="VARCHAR"/>
-        <result property="prostep" column="prostep" jdbcType="VARCHAR"/>
-        <result property="protypeid" column="protypeid" jdbcType="INTEGER"/>
-        <result property="proname" column="proname" jdbcType="VARCHAR"/>
-        <result property="imageid" column="imageid" jdbcType="INTEGER"/>
-        <result property="prostatus" column="prostatus" jdbcType="VARCHAR"/>
-        <result property="busid" column="busid" jdbcType="INTEGER"/>
-        <result property="tecid" column="tecid" jdbcType="INTEGER"/>
-        <!--设置新属性的映射关系-->
-        <result property="image.imageurl" column="imageurl"></result>
-    </resultMap>
 </mapper>
 

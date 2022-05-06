@@ -41,10 +41,10 @@ public class ProjectController {
      * @param pageRequest      分页对象
      * @return 查询结果
      */
-    @GetMapping
-    public ResponseEntity<Page<Project>> queryByPage(Project project, PageRequest pageRequest) {
-        return ResponseEntity.ok(this.projectService.queryByPage(project, pageRequest));
-    }
+    // @GetMapping
+    // public ResponseEntity<Page<Project>> queryByPage(Project project, PageRequest pageRequest) {
+    //     return ResponseEntity.ok(this.projectService.queryByPage(project, pageRequest));
+    // }
 
     /**
      * 通过主键查询单条数据
@@ -92,7 +92,7 @@ public class ProjectController {
 
 
     @ApiOperation(value = "获取项目信息",notes = "获取所有的项目信息")
-    @GetMapping("getProinfos")
+    @GetMapping("/")
     public R getProinfos(){
         try {
             List<Project> ps = projectService.getProinfos();
