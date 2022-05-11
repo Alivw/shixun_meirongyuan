@@ -4,6 +4,7 @@ import com.jalivv.mry.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 /**
@@ -26,8 +27,8 @@ public interface UserDao {
     /**
      * 查询指定行数据
      *
-     * @param user 查询条件
-     * @param pageable         分页对象
+     * @param user     查询条件
+     * @param pageable 分页对象
      * @return 对象列表
      */
     List<User> queryAllByLimit(User user, @Param("pageable") Pageable pageable);
@@ -81,5 +82,15 @@ public interface UserDao {
      */
     int deleteById(Long id);
 
+    /**
+     * 通过用户名查询用户对象
+     *
+     * @param username
+     * @return
+     */
+    User queryUserByUserName(String username);
+
+
+    User queryUserByPhoneAndPwd(@Param("phone") String phone, @Param("password") String nwePassword);
 }
 

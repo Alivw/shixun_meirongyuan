@@ -1,5 +1,6 @@
 package com.jalivv.mry.service;
 
+import com.jalivv.mry.entity.R;
 import com.jalivv.mry.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -53,4 +54,12 @@ public interface UserService {
      */
     boolean deleteById(Long id);
 
+    /**
+     *  用户注册
+     * @param user
+     * @return
+     */
+    R userRegister(User user);
+
+    R userLogin(String phone, String password, String code);
 }

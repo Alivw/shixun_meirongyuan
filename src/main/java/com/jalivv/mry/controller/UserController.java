@@ -1,5 +1,6 @@
 package com.jalivv.mry.controller;
 
+import com.jalivv.mry.entity.R;
 import com.jalivv.mry.entity.User;
 import com.jalivv.mry.service.UserService;
 import org.springframework.data.domain.Page;
@@ -27,8 +28,8 @@ public class UserController {
     /**
      * 分页查询
      *
-     * @param user 筛选条件
-     * @param pageRequest      分页对象
+     * @param user        筛选条件
+     * @param pageRequest 分页对象
      * @return 查询结果
      */
     @GetMapping
@@ -80,5 +81,18 @@ public class UserController {
         return ResponseEntity.ok(this.userService.deleteById(id));
     }
 
-}
+
+    @PostMapping("userRegister")
+    public R userRegister(User user) {
+        return userService.userRegister(user);
+    }
+
+    @PostMapping("userLogin")
+    public R userLogin(String phone, String password, String code) {
+        System.out.println("phone = " + phone);
+        System.out.println("password = " + password);
+        System.out.println("code = " + code);//接收微信凭证
+         return userService.userLogin(phone,password ,code ); }
+
+    }
 
