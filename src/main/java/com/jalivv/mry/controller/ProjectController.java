@@ -91,9 +91,9 @@ public class ProjectController {
     }
 
 
-    @ApiOperation(value = "获取项目信息",notes = "获取所有的项目信息")
+    @ApiOperation(value = "获取项目信息", notes = "获取所有的项目信息")
     @GetMapping("/")
-    public R getProinfos(){
+    public R getProinfos() {
         try {
             List<Project> ps = projectService.getProinfos();
 
@@ -104,9 +104,9 @@ public class ProjectController {
         }
     }
 
-    @ApiOperation(value = "获取项目信息",notes = "获取所有的项目信息")
+    @ApiOperation(value = "获取项目信息", notes = "获取所有的项目信息")
     @GetMapping("/fatch")
-    public R getProInfosFatch(Page page){
+    public R getProInfosFatch(Page page) {
         try {
 
             List<Project> ps = projectService.getProinfos((page.getPageNo() - 1) * page.getPageSize(), page.getPageSize());
@@ -116,6 +116,12 @@ public class ProjectController {
             logger.error("{}", e.getMessage());
             return R.error("获取项目信息失败" + e.getMessage(), null);
         }
+    }
+
+    @GetMapping("getProInfoById")
+    public R getProInfoById(Long id) {
+        System.out.println("id = " + id);
+        return projectService.getProInfoById(id);
     }
 
 }

@@ -37,8 +37,8 @@ public class ProjectServiceImpl implements ProjectService {
     /**
      * 分页查询
      *
-     * @param project 筛选条件
-     * @param pageRequest      分页对象
+     * @param project     筛选条件
+     * @param pageRequest 分页对象
      * @return 查询结果
      */
     @Override
@@ -84,6 +84,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     /**
      * 获取所有的项目信息
+     *
      * @return
      */
     @Override
@@ -93,6 +94,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     /**
      * 分页获取项目信息
+     *
      * @param start
      * @param pageSize
      * @return
@@ -101,4 +103,17 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> getProinfos(int start, int pageSize) {
         return projectDao.getProinfosFatch(start, pageSize);
     }
+
+    @Override
+    public R getProInfoById(Long id) {
+        try {
+            Project project = projectDao.queryById(id);
+            return R.ok(project);
+        } catch (Exception e) {
+            System.out.println(e);
+            return R.error("9999", "网络异常");
+        }
+
+    }
+
 }

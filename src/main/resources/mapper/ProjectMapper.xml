@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jalivv.mry.dao.ProjectDao">
-
     <resultMap type="com.jalivv.mry.entity.Project" id="ProjectMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="proexplain" column="proexplain" jdbcType="VARCHAR"/>
@@ -19,16 +18,30 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="ProjectMap">
-        select
-          id, proexplain, proprice, prostep, protypeid, proname, imageid, prostatus, busid, tecid
-        from project
-        where id = #{id}
+        SELECT p.id         pid,
+
+               p.proexplain proexplain,
+               p.proprice   proprice,
+               p.prostep    prostep,
+               p.protypeid  protypeid,
+               p.proname    proname,
+               p.imageid    imageid,
+               p.prostatus  prostatus,
+               p.busid      busid,
+               p.tecid      tecid,
+               i.imageurl   imageurl
+        from project p,
+             image i
+        where p.imageid = i.id
+          and p.prostatus = '1'
+          and p.id =
+              #{id}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ProjectMap">
         select
-          id, proexplain, proprice, prostep, protypeid, proname, imageid, prostatus, busid, tecid
+        id, proexplain, proprice, prostep, protypeid, proname, imageid, prostatus, busid, tecid
         from project
         <where>
             <if test="id != null">
@@ -106,14 +119,16 @@
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into project(proexplain, proprice, prostep, protypeid, proname, imageid, prostatus, busid, tecid)
-        values (#{proexplain}, #{proprice}, #{prostep}, #{protypeid}, #{proname}, #{imageid}, #{prostatus}, #{busid}, #{tecid})
+        values (#{proexplain}, #{proprice}, #{prostep}, #{protypeid}, #{proname}, #{imageid}, #{prostatus}, #{busid},
+                #{tecid})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
         insert into project(proexplain, proprice, prostep, protypeid, proname, imageid, prostatus, busid, tecid)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.proexplain}, #{entity.proprice}, #{entity.prostep}, #{entity.protypeid}, #{entity.proname}, #{entity.imageid}, #{entity.prostatus}, #{entity.busid}, #{entity.tecid})
+            (#{entity.proexplain}, #{entity.proprice}, #{entity.prostep}, #{entity.protypeid}, #{entity.proname},
+            #{entity.imageid}, #{entity.prostatus}, #{entity.busid}, #{entity.tecid})
         </foreach>
     </insert>
 
@@ -121,7 +136,8 @@
         insert into project(proexplain, proprice, prostep, protypeid, proname, imageid, prostatus, busid, tecid)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.proexplain}, #{entity.proprice}, #{entity.prostep}, #{entity.protypeid}, #{entity.proname}, #{entity.imageid}, #{entity.prostatus}, #{entity.busid}, #{entity.tecid})
+            (#{entity.proexplain}, #{entity.proprice}, #{entity.prostep}, #{entity.protypeid}, #{entity.proname},
+            #{entity.imageid}, #{entity.prostatus}, #{entity.busid}, #{entity.tecid})
         </foreach>
         on duplicate key update
         proexplain = values(proexplain),
@@ -172,9 +188,10 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from project where id = #{id}
+        delete
+        from project
+        where id = #{id}
     </delete>
-
 
 
     <!--getProinfos 多表查询，查询项目的同时，把对应的图片也查询出来 返回resultMap-->
@@ -199,24 +216,24 @@
     </select>
 
     <select id="getProinfosFatch" resultMap="ProjectMap">
-        SELECT
-            p.id id,
-            p.proexplain proexplain,
-            p.proprice proprice,
-            p.prostep prostep,
-            p.protypeid protypeid,
-            p.proname proname,
-            p.imageid imageid,
-            p.prostatus prostatus,
-            p.busid busid,
-            p.tecid tecid,
+        SELECT p.id         id,
+               p.proexplain proexplain,
+               p.proprice   proprice,
+               p.prostep    prostep,
+               p.protypeid  protypeid,
+               p.proname    proname,
+               p.imageid    imageid,
+               p.prostatus  prostatus,
+               p.busid      busid,
+               p.tecid      tecid,
 
-            i.imageurl imageurl
-        from project p,image i
+               i.imageurl   imageurl
+        from project p,
+             image i
         where p.imageid = i.id
           and p.prostatus = '1'
 
-        ORDER BY p.id limit  #{start} ,#{pageSize}
+        ORDER BY p.id limit #{start}, #{pageSize}
     </select>
 </mapper>
 

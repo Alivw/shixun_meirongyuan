@@ -69,4 +69,11 @@ public interface ProjectService {
      * @return
      */
     List<Project> getProinfos(int start, int pageSize);
+
+    /**
+     * 根据项目id 获取项目详情
+     * @param id
+     * @return
+     */
+    R getProInfoById(Long id);
 }
