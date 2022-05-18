@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jalivv.mry.dao.BusinessDao">
-
     <resultMap type="com.jalivv.mry.entity.Business" id="BusinessMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <!--注意-->
+        <result property="id" column="bid" jdbcType="INTEGER"/>
         <result property="busname" column="busname" jdbcType="VARCHAR"/>
         <result property="busaddress" column="busaddress" jdbcType="VARCHAR"/>
         <result property="busexplain" column="busexplain" jdbcType="VARCHAR"/>
         <result property="bustell" column="bustell" jdbcType="VARCHAR"/>
-        <result property="servertime" column="servertime" jdbcType="VARCHAR"/>
+        <result property="servertime" column="servertime" jdbcType="VARCHAR"/> <!--项目名称和id-->
+        <result property="project.id" column="pid"></result>
+        <result property="project.proname" column="proname"></result> <!--图片的路径-->
+        <result property="project.image.imageurl" column="imageurl"></result>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BusinessMap">
-        select
-          id, busname, busaddress, busexplain, bustell, servertime
+        select id,
+               busname,
+               busaddress,
+               busexplain,
+               bustell,
+               servertime
         from business
         where id = #{id}
     </select>
@@ -22,7 +29,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BusinessMap">
         select
-          id, busname, busaddress, busexplain, bustell, servertime
+        id, busname, busaddress, busexplain, bustell, servertime
         from business
         <where>
             <if test="id != null">
@@ -83,7 +90,7 @@
         insert into business(busname, busaddress, busexplain, bustell, servertime)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.busname}, #{entity.busaddress}, #{entity.busexplain}, #{entity.bustell}, #{entity.servertime})
+            (#{entity.busname}, #{entity.busaddress}, #{entity.busexplain}, #{entity.bustell}, #{entity.servertime})
         </foreach>
     </insert>
 
@@ -126,8 +133,29 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from business where id = #{id}
+        delete
+        from business
+        where id = #{id}
     </delete>
 
+    <select id="getBusInfoByProId" resultMap="BusinessMap">
+        SELECT b.id
+                            bid,
+               b.busname    busname,
+               b.busaddress busaddress,
+               b.busexplain busexplain,
+               b.bustell    bustell,
+               b.servertime servertime,
+               p.id         pid,
+               p.proname    proname,
+               i.imageurl   imageurl
+        FROM business b,
+             project p,
+             image i
+        where p.busid = b.id
+          and p.imageid = i.id
+          and p.id =
+              #{id}
+    </select>
 </mapper>
 

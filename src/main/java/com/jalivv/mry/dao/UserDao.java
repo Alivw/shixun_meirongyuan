@@ -92,5 +92,7 @@ public interface UserDao {
 
 
     User queryUserByPhoneAndPwd(@Param("phone") String phone, @Param("password") String nwePassword);
+
+    String queryOpenidByToken(String token);
 }
 

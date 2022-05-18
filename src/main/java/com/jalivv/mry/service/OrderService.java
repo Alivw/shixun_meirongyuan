@@ -1,6 +1,7 @@
 package com.jalivv.mry.service;
 
 import com.jalivv.mry.entity.Order;
+import com.jalivv.mry.entity.R;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -53,4 +54,5 @@ public interface OrderService {
      */
     boolean deleteById(Long id);
 
+    R createOrder(Order order, String token);
 }

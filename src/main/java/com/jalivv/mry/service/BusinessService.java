@@ -1,6 +1,7 @@
 package com.jalivv.mry.service;
 
 import com.jalivv.mry.entity.Business;
+import com.jalivv.mry.entity.R;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -53,4 +54,5 @@ public interface BusinessService {
      */
     boolean deleteById(Long id);
 
+    R getBusInfoByProId(Long id);
 }

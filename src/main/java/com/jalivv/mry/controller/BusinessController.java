@@ -1,6 +1,7 @@
 package com.jalivv.mry.controller;
 
 import com.jalivv.mry.entity.Business;
+import com.jalivv.mry.entity.R;
 import com.jalivv.mry.service.BusinessService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,8 +31,8 @@ public class BusinessController {
     /**
      * 分页查询
      *
-     * @param business 筛选条件
-     * @param pageRequest      分页对象
+     * @param business    筛选条件
+     * @param pageRequest 分页对象
      * @return 查询结果
      */
     @GetMapping
@@ -84,5 +85,11 @@ public class BusinessController {
         return ResponseEntity.ok(this.businessService.deleteById(id));
     }
 
+
+    @GetMapping("getBusInfoByProId")
+    public R getBusInfoByProId(Long id) {
+        System.out.println("id = " + id);
+        return businessService.getBusInfoByProId(id);
+    }
 }
 

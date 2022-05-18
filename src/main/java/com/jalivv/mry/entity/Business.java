@@ -16,6 +16,18 @@ public class Business implements Serializable {
      * 商家名称
      */
     private String busname;
+
+    //定义项目对象，接收返回的项目名称和id以及图片的路径
+    private Project project;
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
     /**
      * 商家地址
      */

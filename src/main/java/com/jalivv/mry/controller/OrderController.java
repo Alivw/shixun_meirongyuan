@@ -1,6 +1,7 @@
 package com.jalivv.mry.controller;
 
 import com.jalivv.mry.entity.Order;
+import com.jalivv.mry.entity.R;
 import com.jalivv.mry.service.OrderService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,8 +28,8 @@ public class OrderController {
     /**
      * 分页查询
      *
-     * @param order 筛选条件
-     * @param pageRequest      分页对象
+     * @param order       筛选条件
+     * @param pageRequest 分页对象
      * @return 查询结果
      */
     @GetMapping
@@ -80,5 +81,12 @@ public class OrderController {
         return ResponseEntity.ok(this.orderService.deleteById(id));
     }
 
+
+    @PostMapping("createOrder")
+    public R createOrder(Order order, String token) {
+        System.out.println("token = " + token);
+        System.out.println("order = " + order);
+        return orderService.createOrder(order, token);
+    }
 }
 

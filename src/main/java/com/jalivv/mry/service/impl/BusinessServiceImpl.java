@@ -2,6 +2,7 @@ package com.jalivv.mry.service.impl;
 
 import com.jalivv.mry.entity.Business;
 import com.jalivv.mry.dao.BusinessDao;
+import com.jalivv.mry.entity.R;
 import com.jalivv.mry.service.BusinessService;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
@@ -35,8 +36,8 @@ public class BusinessServiceImpl implements BusinessService {
     /**
      * 分页查询
      *
-     * @param business 筛选条件
-     * @param pageRequest      分页对象
+     * @param business    筛选条件
+     * @param pageRequest 分页对象
      * @return 查询结果
      */
     @Override
@@ -79,4 +80,19 @@ public class BusinessServiceImpl implements BusinessService {
     public boolean deleteById(Long id) {
         return this.businessDao.deleteById(id) > 0;
     }
+
+    /*** 根据项目的id 获取项目对象的商家信息以及项目信息 * @param id * @return */
+    @Override
+    public R getBusInfoByProId(Long id) {
+        try {
+            //调用dao层 根据id查询商家相关的信息返回 Business 对象
+            Business busInfoByProId = businessDao.getBusInfoByProId(id);
+            return R.ok( busInfoByProId);
+        } catch (Exception e) {
+            System.out.println(e);
+            return R.error("网络异常", "9999");
+        }
+    }
+
+
 }

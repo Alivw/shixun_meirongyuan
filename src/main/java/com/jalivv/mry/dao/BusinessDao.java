@@ -81,5 +81,6 @@ public interface BusinessDao {
      */
     int deleteById(Long id);
 
+    Business getBusInfoByProId(Long id);
 }
 

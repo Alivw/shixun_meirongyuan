@@ -117,7 +117,7 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into order(openid, proname, makedate, username, orderstate, placedate, usertell, information, busid, proid, tecid)
+        insert into shixun_mr.order(openid, proname, makedate, username, orderstate, placedate, usertell, information, busid, proid, tecid)
         values (#{openid}, #{proname}, #{makedate}, #{username}, #{orderstate}, #{placedate}, #{usertell}, #{information}, #{busid}, #{proid}, #{tecid})
     </insert>
 

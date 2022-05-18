@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jalivv.mry.dao.ProjectDao">
     <resultMap type="com.jalivv.mry.entity.Project" id="ProjectMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="id" column="pid" jdbcType="INTEGER"/>
         <result property="proexplain" column="proexplain" jdbcType="VARCHAR"/>
         <result property="proprice" column="proprice" jdbcType="NUMERIC"/>
         <result property="prostep" column="prostep" jdbcType="VARCHAR"/>
@@ -19,7 +19,6 @@
     <!--查询单个-->
     <select id="queryById" resultMap="ProjectMap">
         SELECT p.id         pid,
-
                p.proexplain proexplain,
                p.proprice   proprice,
                p.prostep    prostep,
