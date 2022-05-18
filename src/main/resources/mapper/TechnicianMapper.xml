@@ -1,46 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jalivv.mry.dao.TechnicianDao">
-
     <resultMap type="com.jalivv.mry.entity.Technician" id="TechnicianMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="techexplain" column="techexplain" jdbcType="VARCHAR"/>
         <result property="techname" column="techname" jdbcType="VARCHAR"/>
         <result property="busid" column="busid" jdbcType="INTEGER"/>
         <result property="imageurl" column="imageurl" jdbcType="VARCHAR"/>
+        <!--项目-->
+        <collection property="projects" ofType="com.jalivv.mry.entity.Project">
+            <result property="id" column="pid"></result>
+            <result property="proname" column="proname"></result>
+            <result property="proprice" column="proprice"></result>
+        </collection>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="TechnicianMap">
-        select
-          id, techexplain, techname, busid, imageurl
+        select id,
+               techexplain,
+               techname,
+               busid,
+               imageurl
         from technician
         where id = #{id}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="TechnicianMap">
-        select
-          id, techexplain, techname, busid, imageurl
-        from technician
-        <where>
-            <if test="id != null">
-                and id = #{id}
-            </if>
-            <if test="techexplain != null and techexplain != ''">
-                and techexplain = #{techexplain}
-            </if>
-            <if test="techname != null and techname != ''">
-                and techname = #{techname}
-            </if>
-            <if test="busid != null">
-                and busid = #{busid}
-            </if>
-            <if test="imageurl != null and imageurl != ''">
-                and imageurl = #{imageurl}
-            </if>
-        </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
+        select id, techexplain, techname, busid, imageurl
+        from shixun_mr.technician limit #{offset}, #{limit}
+    </select>
+
+    <select id="queryCount" resultType="long">
+        select count(id)
+        FROM technician
     </select>
 
     <!--统计总行数-->
@@ -76,7 +70,7 @@
         insert into technician(techexplain, techname, busid, imageurl)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.techexplain}, #{entity.techname}, #{entity.busid}, #{entity.imageurl})
+            (#{entity.techexplain}, #{entity.techname}, #{entity.busid}, #{entity.imageurl})
         </foreach>
     </insert>
 
@@ -115,8 +109,23 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from technician where id = #{id}
+        delete
+        from technician
+        where id = #{id}
     </delete>
 
+
+
+    <select id="getTecInfoById" resultMap="TechnicianMap">
+        SELECT t.id          id,
+               t.techexplain techexplain,
+               t.techname    techname,
+               t.busid       busid,
+               t.imageurl    imageurl,
+               p.id          pid,
+               p.proname     proname,
+               p.proprice    proprice FROMtechnician t,project p,
+               tecpro        tp where tp.tecid = t.id and tp.proid = p.id and t.id = #{id}
+    </select>
 </mapper>
 

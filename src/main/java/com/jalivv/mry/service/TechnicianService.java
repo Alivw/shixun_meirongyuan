@@ -1,5 +1,6 @@
 package com.jalivv.mry.service;
 
+import com.jalivv.mry.entity.R;
 import com.jalivv.mry.entity.Technician;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -53,4 +54,7 @@ public interface TechnicianService {
      */
     boolean deleteById(Long id);
 
+    R getTecInfos(int page, int limit);
+
+    R getTecInfoById(Long id);
 }

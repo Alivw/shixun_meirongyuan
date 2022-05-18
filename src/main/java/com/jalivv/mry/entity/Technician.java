@@ -1,6 +1,7 @@
 package com.jalivv.mry.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * (Technician)实体类
@@ -17,6 +18,17 @@ public class Technician implements Serializable {
     /**
      * 技师简介
      */
+
+    private List<Project> projects;
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
     private String techexplain;
     /**
      * 技师姓名

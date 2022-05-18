@@ -1,5 +1,6 @@
 package com.jalivv.mry.controller;
 
+import com.jalivv.mry.entity.R;
 import com.jalivv.mry.entity.Technician;
 import com.jalivv.mry.service.TechnicianService;
 import org.springframework.data.domain.Page;
@@ -27,8 +28,8 @@ public class TechnicianController {
     /**
      * 分页查询
      *
-     * @param technician 筛选条件
-     * @param pageRequest      分页对象
+     * @param technician  筛选条件
+     * @param pageRequest 分页对象
      * @return 查询结果
      */
     @GetMapping
@@ -80,5 +81,17 @@ public class TechnicianController {
         return ResponseEntity.ok(this.technicianService.deleteById(id));
     }
 
+
+    @GetMapping("getTecInfos")
+    public R getTecInfos(int page, int limit) {
+        return technicianService.getTecInfos(page, limit);
+    }
+
+
+    @GetMapping("getTecInfoById")
+    public R getTecInfoById(Long id) {
+        System.out.println("id = " + id);
+        return technicianService.getTecInfoById(id);
+    }
 }
 

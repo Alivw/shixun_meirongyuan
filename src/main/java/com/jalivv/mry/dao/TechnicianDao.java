@@ -30,8 +30,8 @@ public interface TechnicianDao {
      * @param pageable         分页对象
      * @return 对象列表
      */
-    List<Technician> queryAllByLimit(Technician technician, @Param("pageable") Pageable pageable);
-
+    List<Technician> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    Long queryCount();
     /**
      * 统计总行数
      *
@@ -81,5 +81,6 @@ public interface TechnicianDao {
      */
     int deleteById(Long id);
 
+    Technician getTecInfoById(Long id);
 }
 
